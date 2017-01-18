@@ -1,0 +1,76 @@
+<!--
+  Generated template for the ChillerDetailsPage page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-toolbar>
+      <ion-title>
+          <img class="nav-title" src="images/nav-chillers.svg" height="130"/>
+      </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<div (swipe)="swipeEvent($event)">
+    <div class="details-header">
+      <div class="head-top">
+          <div class="details-photo">
+            <img [src]="picture" />
+          </div>
+          <div class="details-info">
+            <h1>{{firstName}} {{lastName}}</h1>
+            <h2>{{phone}}</h2>
+            <h2>{{email}}</h2>
+          </div>
+      </div>
+      <div class="btn-send-contener">
+        <div class="btn-send-chill">
+          Send a Chill <ion-icon name="chillter-icon-tab-bar-chills"></ion-icon>
+        </div>
+      </div>
+    </div>
+    <div class="details-events">
+      <ion-searchbar></ion-searchbar>
+      <ion-scroll scrollY="true"> 
+      <ion-list>
+          <ion-list-header *ngIf="comingEvents.length != 0">
+            Coming Soon
+          </ion-list-header>
+          <ion-item *ngFor="let event of comingEvents" (tap)="showDetailEvent(event.info.id)">
+          <ion-avatar item-left>
+              <img src="http://www.chillter.com/api/images/chill-{{event.info.logo}}.svg">
+          </ion-avatar>
+          <div style="display:inline-block;float:left;">
+          <h2>{{event.info.chiller}}</h2>
+          <p>{{event.info.name}}</p>
+          </div>
+          <div style="display:inline-block;float:right;">
+            <i class="soon">{{event.date | toNow}}</i>
+            <i><img src="{{event.status | statusImg}}" class="status-img"/></i>
+          </div>
+          </ion-item>
+          <ion-list-header *ngIf="historyEvents.length != 0">
+            History
+          </ion-list-header>
+          <ion-item *ngFor="let event of historyEvents" (tap)="showDetailEvent(event.info.id)">
+          <ion-avatar item-left>
+              <img src="http://www.chillter.com/api/images/chill-{{event.info.logo}}.svg">
+          </ion-avatar>
+          <div style="display:inline-block;float:left;">
+          <h2>{{event.info.chiller}}</h2>
+          <p>{{event.info.name}}</p>
+          </div>
+          <div style="display:inline-block;float:right;">
+            <i class="soon">{{event.date | toNow}}</i>
+            <i><img src="{{event.status | statusImg}}" class="status-img"/></i>
+          </div>
+          </ion-item>
+          
+      </ion-list>
+      </ion-scroll> 
+    </div>
+</div>
+</ion-content>

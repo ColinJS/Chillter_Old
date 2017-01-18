@@ -1,0 +1,99 @@
+<!--
+  Generated template for the ChillUtilsPage page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+<ion-toolbar>
+    <ion-title>{{title}}</ion-title>
+    <ion-buttons>
+            <button (click)="close()">
+                <img src="images/close-outline.svg" height="25px"/>
+            </button>
+    </ion-buttons>
+    <ion-buttons *ngIf="expensesPage" end>
+            <button (click)="resolve()">
+                res
+            </button>
+    </ion-buttons>
+</ion-toolbar>
+
+
+</ion-header>
+
+<ion-content class="chill-utils">
+  
+   <ion-slides [options]="slidesOptions" (ionDidChange)="changeSlide($event)" >
+           
+        <ion-slide style="display:block;">
+            <div *ngFor="let c of cars" >
+                <h1>{{c.driver.firstname}}</h1>
+                <div class="car-class">
+                    <img src="images/car.svg" />
+                    <div class="place-ar">
+                       <div class="passenger" *ngFor="let p of c.passengers"  >
+                        <img src="{{p.picture}}" *ngIf="p.id != c.passengers[0].id" (tap)="passengersTap(p.id,c.id)">
+                       </div>
+                    </div>
+                    <div class="place-av">
+                        <img src="{{c.driver.picture}}" (tap)="passengersTap(c.driver.id,c.id)">
+                        <img *ngIf="c.passengers[0]" src="{{c.passengers[0].picture}}" (tap)="passengersTap(c.passengers[0].id,c.id)">
+                    </div>
+                    <div class="suppr-car" *ngIf="c.mine" (tap)="deleteCar(c.id)">
+                        <img src="images/close-outline.svg"/>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="addCarBool">
+                <input [(ngModel)]="seats" class="seats-utils" placeholder="seats">
+                <div class="add-car" (tap)="addCar()">
+                    Add
+                </div>
+            </div>
+            
+        </ion-slide>
+        <ion-slide style="display:block;">
+            
+            <ul class="list">
+                <li *ngFor="let e of list" (tap)="elementTap(e.id,e.firstname)" (press)="deleteElement(e.id)" class="element-list">
+                    <div class="list-bullet"></div>
+                    <div class="element">{{e.content}}</div>
+                    <div class="taker">{{e.firstname}}</div>
+                </li>
+            </ul>
+            <div class="list-input">
+                <input type="text" [(ngModel)]="element" class="element-utils" placeholder="element">
+                <div class="add-elem" (tap)="addElement()">
+                    Add
+                </div>
+            </div>
+            
+        </ion-slide>
+        <ion-slide style="display:block;">
+            
+            <div *ngFor="let e of exps;let ind=index" class="expense" (tap)="toggleExpsDetails(ind)">
+                <div class="exps-title">
+                    <div class="exps-name">{{e.payer.firstname}}</div>
+                    <div class="exps-sum">{{e.sum}} €</div>
+                </div>
+                <div class="exps-details" *ngIf="showExpsList[ind]">
+                    <ul class="exps-list">
+                        <li class="exp" *ngFor="let d of e.expenses">
+                            <div class="exp-title">{{d.element}}</div>
+                            <div class="exp-price">{{d.price}} €</div>
+                        </li>
+                    </ul>
+                    
+                </div>
+            </div>
+           <div class="add-exp" (tap)="showAddExp()">
+               Add an expense
+           </div>
+           
+        </ion-slide>
+        
+    </ion-slides>
+    
+</ion-content>

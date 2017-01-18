@@ -1,0 +1,270 @@
+/*ion-page.edit-chills::before {
+ content:"";
+ z-index: 300;
+ position:fixed;
+ top:0px;
+ height: 100%;
+ width: 100%;
+ background-color: white;
+ transform: translateX(-50%);
+}*/
+
+.overlay{
+    
+ z-index: 300;
+ position:fixed;
+ top:0px;
+ height: 100%;
+ width: 100%;
+ background-repeat: no-repeat;
+ background-size: 80%;
+ background-position: center 40%;
+ background-color: rgba(255,255,255,0.7);
+ 
+}
+
+.leftpan{
+    background-image: url("../assets/images/filter-yes.svg");
+}
+.rightpan{
+    background-image: url("../assets/images/filter-no.svg");
+}
+
+.chills-header{
+    width:100%;
+    height:20vmax;
+    min-height:11.4rem;
+    text-align: center;
+    position:relative;
+    overflow: hidden;
+}
+
+.ch-background{
+    width:100%;
+    height:20vmax;
+    min-height:11.4rem;
+    position:absolute;
+    background-color: white;
+    border-bottom: 3px solid $chillter-col;
+}
+
+.ch-background img-loader, .ch-background img{
+    height:100%;
+    width:100%;
+    display:block;
+    position:absolute;
+}
+
+.ch-logo{
+    width:150px;
+    height:150px;
+    top:20%;
+    left:calc((100% - 150px) / 2);
+    border-radius:100%;
+    display:inline-block;
+    position:absolute;
+    border: 3px solid $chillter-col;
+    background-color: white;
+}
+
+.ch-logo img-loader, .ch-logo img{
+    border-radius:100%;
+    display:block;
+    height:100%;
+    width:100%;
+}
+
+.ch-close{
+    position:absolute;
+    width:30px;
+    left:5px;
+    top:10px;
+    margin:5px;
+}
+
+.invite{
+    color:$chillter-col;
+    text-align:center;
+    overflow:hidden;
+    padding-top:0.5rem;
+}
+.invite input{
+    margin:auto;
+    width:100%;
+    border:none;
+    text-align: center;
+    text-transform: capitalize;
+}
+.invite h1{
+    margin:0px;
+    font-size:3rem;
+    font:bold;
+    text-transform: capitalize;
+}
+
+.invite-header .title{
+    font-family: LemonMilk;
+}
+
+.invite h2{
+    margin-bottom:1vmax;
+}
+
+.invite-header input{
+    text-transform: uppercase;
+}
+.invite-header h2{
+    color: rgb(180,180,180);
+    font-size:1.7rem;
+    font-family: Lobster;
+}
+
+.invite-header .creator{
+    color: gray;
+    font-size:2rem;
+}
+
+.invite-geo{
+    padding:8px;
+    height:11vmax;
+    min-height:8.8rem;
+    border:2px solid $chillter-col;
+    border-radius:2.7rem;
+    overflow: hidden;
+}
+
+.invite-geo h2{
+    margin-top:0vmax;
+    font-size:2.2rem;
+    opacity:0.8;
+}
+
+.invite-time{
+    margin:2vmax 0px;
+    height:8vmax;
+    min-height: 7rem;
+    border:2px solid $chillter-col;
+    border-radius:4rem;
+    font-size:1.8rem;
+    overflow: hidden;
+}
+
+.invite-time div{
+    display:inline-block;
+    height:100%;
+}
+
+.invite-time-left{
+    position:relative;
+    padding:12px;
+}
+
+.invite-time-right{
+    height:auto;
+    min-height:100%;
+    float:right;
+    text-align:justify;
+    font-size:2rem;
+    padding-top:4%;
+    background-color:rgba($chillter-col,0.8);
+    vertical-align: text-bottom;
+    width:12%;
+    color:white;
+}
+
+.invite-day{
+    font-size:2.3rem;
+}
+
+.invite-hours{
+    font-size:3.7rem;
+    font: bold;
+}
+
+.invite-minutes{
+    font-size:3.2rem;
+}
+
+.exp{
+    margin-left:3px;
+    font-size:1.2rem;
+    vertical-align: top;
+}
+
+.invite-com{
+    margin:0px;
+    padding:3px 0px;
+    border-top:1px solid $chillter-col;
+    border-bottom: 1px solid $chillter-col;
+    height:8vmax;
+    min-height: 4rem;
+    font-size:1.5rem;
+    text-align:center;
+    overflow: hidden;
+}
+
+.invite-com textarea{
+    margin:auto;
+    padding:0px;
+    height:100%;
+}
+
+.invite-utils{
+    margin:0.5vmax 0px;
+    height:8vmax;
+}
+
+.invite-utils img{
+    height:100%;
+    margin:0px 2vmin;
+}
+
+.invite-friends{
+    height:6.5rem;
+    text-align: left;
+    line-height: 6.5rem;
+    margin: 0px 1rem;
+    padding: 0px;
+}
+
+.friend-contener{
+    position:relative;
+    height:6.5rem;
+    width:6.5rem;
+    display: inline-block;
+}
+
+.invite-friends img{
+    height:6.5rem;
+    width:6.5rem;
+    margin:0px 4px;
+    border-radius:50%;
+    vertical-align: middle;
+}
+
+.ion-scroll-friends{
+    height:6.6rem;
+    width: calc(100% - 6.5rem - 24px);
+    display: inline-block;
+    overflow-y: hidden;
+    overflow-x: scroll;
+    vertical-align: middle;
+}
+
+.ion-scroll-content{
+    white-space: nowrap;
+}
+
+.delete-friend{
+    position: absolute;
+    top: 5px;
+    left: 4.5rem;
+    height: 20px;
+    vertical-align: top;
+}
+
+.delete-friend img{
+    height: 100%;
+    width: 100%;
+    vertical-align: top;
+}

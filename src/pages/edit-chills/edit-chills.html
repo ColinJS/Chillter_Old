@@ -1,0 +1,66 @@
+<!--
+  Generated template for the EditChillsPage page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+  [@overlayState]="sendPos"
+  [@overlayState]="backPos"
+-->
+
+<ion-content class="edit-chills" scroll="false">
+    <div #leftPan class="overlay leftpan" [style.opacity]="sendOpa" [style.transform]="sendPos"></div>
+    <div #rightPan class="overlay rightpan" [style.opacity]="backOpa" [style.transform]="backPos"></div>
+    
+    <div class="chills-header">
+            
+        <div class="ch-background">
+            <!-- <img-loader id="background"></img-loader> -->
+            <img-loader [src]="banner" id="background"></img-loader>
+        </div>
+        <div class="ch-logo">
+            <!-- <img-loader id="logo"></img-loader> -->
+            <img-loader id="logo" [src]="logo" ></img-loader>
+        </div>
+        <!-- <img  class="ch-close" src="images/close-outline.svg" height="25px" (click)="close()"/>-->
+    </div>
+    <div class="invite" padding (swipe)="swipeEvent($event)" (pan)="panEvent($event)">
+        
+        <div class="invite-header">
+            <h1><input type="text" class="title"[(ngModel)]="name" /></h1>
+            <h2>you're invited by <i class="creator">{{firstName}} {{lastName}}</i></h2>
+        </div>
+        
+        <div class="invite-geo">
+            <h1><input type="text" placeholder="Location" [(ngModel)]="geo" /></h1>
+            <h2><input type="text" placeholder="Address" [(ngModel)]="geoSpec" /></h2>
+        </div>
+        
+        <div class="invite-time" (click)="showDatePicker()"> <!-- test() -->
+            <div class="invite-time-left"><i class="invite-day">{{day}}</i> à <i class="invite-hours">{{hours}}</i><i class="exp">h</i><i class="invite-minutes">{{min}}</i></div>
+            <div class="invite-time-right">{{soonDate | toNow}}</div>
+        </div>
+        
+        <div>
+            <ion-textarea [(ngModel)]="comment" placeholder="comment" class="invite-com" scrollY="true" text-justify text-center>
+            </ion-textarea>
+        </div>
+        <div class="invite-utils">
+            <img src="images/tool-car-outline.svg" (tap)="showUtils(0)"/>
+            <img src="images/tool-list-outline.svg" (tap)="showUtils(1)"/>
+            <img src="images/tool-pig-outline.svg"(tap)="showUtils(2)" />
+        </div>
+        <div class="invite-friends">
+            <img src="http://www.chillter.com/api/images/chill-plus.svg" (tap)="showFriends()"/>
+            <div class="ion-scroll-friends">
+              <div class="ion-scroll-content">
+                <div class="friend-contener" *ngFor="let friend of friends">
+                    <img src="{{friend.picture}}" />
+                    <div class="delete-friend" (tap)="deleteFriend(friend.id)">
+                        <img src="images/close-outline.svg"/>
+                    </div>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+</ion-content>

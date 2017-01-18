@@ -1,0 +1,38 @@
+.chill-detail {
+
+}
+
+h1.upper{
+    text-transform: uppercase;
+}
+
+.invite-com{
+    text-align: left;
+}
+
+.invite-com scroll-content{
+    padding-left: 3px;
+    padding-top: 3px;
+    padding-right: 3px;
+    padding-bottom: 3px;
+    height:3.5rem;
+}
+
+.friend-list-img{
+  position:relative;
+  display: inline-block;
+  margin:0px;
+  color:$chillter-col;
+}
+
+.status-icon{
+    height: 25px;
+    position: absolute;
+    top: 20px;
+    left: 45px;
+}
+
+.status-icon img{
+    height:100%;
+    width:100%;
+}

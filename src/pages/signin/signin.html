@@ -1,0 +1,41 @@
+
+<ion-header>
+  <ion-navbar>
+    <ion-title >Create account</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-list padding>
+        <div class="avatar">
+            <img-loader id="avatarLoader" border="2px"></img-loader>
+        </div>
+        <ion-item>
+            <!-- <ion-label floating>Firstname</ion-label> -->
+            <ion-input placeholder="Firstname" type="text" required [(ngModel)]="firstname"></ion-input>
+        </ion-item>
+        <ion-item>
+            <!-- <ion-label floating>Lastname</ion-label> -->
+            <ion-input placeholder="Lastname" type="text" required [(ngModel)]="lastname"></ion-input>
+        </ion-item>
+        <ion-item>
+            <!-- <ion-label floating>Password</ion-label> -->
+            <ion-input placeholder="Password" type="password" required [(ngModel)]="password"></ion-input>
+        </ion-item>
+        <ion-item>
+            <!-- <ion-label floating>Confirm password</ion-label> -->
+            <ion-input placeholder="Confirm password" type="password" required [(ngModel)]="confirm"></ion-input>
+        </ion-item>
+        <ion-item>
+            <!-- <ion-label floating>Phone</ion-label> -->
+            <ion-input placeholder="Phone" type="tel" required pattern="^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$" [(ngModel)]="phone"></ion-input>
+        </ion-item>
+        <ion-item>
+            <!-- <ion-label floating>Email</ion-label> -->
+            <ion-input placeholder="Email" type="email" pattern=".+@.+\..+" required [(ngModel)]="email"></ion-input>
+        </ion-item>
+        <ion-item>
+            <button (click)="signUp()" ion-button outline block round large>Sign Up</button>
+        </ion-item>
+    </ion-list>
+</ion-content>

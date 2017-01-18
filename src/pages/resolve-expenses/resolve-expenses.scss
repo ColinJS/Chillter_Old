@@ -1,0 +1,39 @@
+.resolve-expenses {
+
+}
+.res-li div{
+    display: inline-block;
+}
+
+.res-list{
+    list-style: none;
+    padding:0px;
+    margin: 20px 3rem;
+}
+
+.res-li{
+    margin: 1rem 0px;
+}
+
+.res-chiller{
+    color: $chillter-col;
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.res-pay{
+    float: right;
+    color: rgba(0,0,0,0.7);
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.from{
+    margin-right:2rem;
+    text-transform: capitalize;
+}
+
+.to{
+    margin-left:2rem;
+    text-transform: capitalize;
+}

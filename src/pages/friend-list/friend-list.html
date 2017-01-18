@@ -1,0 +1,64 @@
+<!--
+  Generated template for the FriendListPage page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+      <ion-title>
+          <img class="nav-title" src="images/nav-chillers.svg" height="130"/>
+      </ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content class="friend-list">
+    
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+            <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+    
+    <ion-list *ngIf="pendingFriends.length != 0">
+        <ion-item-sliding *ngFor="let pfriend of pendingFriends">
+            <ion-item>
+            <ion-avatar item-left>
+                <img src="{{pfriend.picture}}">
+            </ion-avatar>
+            <h2>{{pfriend.firstname}} {{pfriend.lastname}}</h2>
+            </ion-item>
+            <ion-item-options>
+                <button (click)="acceptFriend(pfriend.id)" white>
+                    <ion-icon name="checkmark" primary></ion-icon>
+                </button>
+                <button (click)="deleteFriend(pfriend.id)" white>
+                    <img src="images/close-outline.svg" height="20px"/>
+                </button>
+            </ion-item-options>
+        </ion-item-sliding>
+    </ion-list>
+    <div class="friends-head-list">
+        <div class="search-friends" >
+            <ion-searchbar (ionInput)="inputChange($event)" ></ion-searchbar>
+        </div>
+        <button class="show-add-friends" ion-button round outline icon-only small (tap)="addFriends()">
+            <ion-icon name="add"></ion-icon>
+        </button>
+    </div>
+    <ion-list>
+        <ion-item-sliding *ngFor="let friend of friends">
+                <ion-item (tap)="showChillerDetails(friend.id)">
+                <ion-avatar item-left>
+                    <img src="{{friend.picture}}">
+                </ion-avatar>
+                <h2>{{friend.firstname}} {{friend.lastname}}</h2>
+                </ion-item>
+                <ion-item-options>
+                    <button ion-button (click)="showDeleteAlert(friend.id)" white>
+                        <img src="images/close-outline.svg" height="20px"/>
+                    </button>
+                </ion-item-options>
+            </ion-item-sliding>
+    </ion-list>
+</ion-content>

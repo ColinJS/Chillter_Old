@@ -1,0 +1,18 @@
+<!--
+  Generated template for the ImgLoader component.
+
+  See https://angular.io/docs/ts/latest/api/core/ComponentMetadata-class.html
+  for more info on Angular 2 Components.
+  
+  for="fileInput"
+  <input type="file" #files style="display:none;" (change)="changeFile(files)" accept="image/*" capture="camera" id="fileInput" />
+
+-->
+<label id="prev_label" class="img-load-label">
+    
+    <div id="preview" class="img-canvas" (tap)="choosePicture()"  #canvas>
+        <div id="contener" class="img-contener" [style.top]="imgTop" [style.left]="imgLeft" [style.height]="imgHeight" [style.width]="imgWidth" (pan)="panAction($event)" (press)="getCropInfo()" >
+            <img [src]="imgSrc" class="img-canvas"/>
+        </div>
+    </div>
+</label>

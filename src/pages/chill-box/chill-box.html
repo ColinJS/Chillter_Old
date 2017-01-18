@@ -1,0 +1,72 @@
+<!--
+  Generated template for the ChillBoxPage page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+  
+  [(ngModel)]="searchWord" 
+  
+-->
+<ion-header>
+  
+  <ion-navbar>
+    <ion-title>
+        <img class="nav-title" src="images/nav-chillbox.svg" height="130"/>
+    </ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content class="chill-box" scrollY="false" scrollX="false">
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+            <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+    <div class="search-evt">
+        <ion-searchbar class="search-evt" (ionInput)="inputChange($event)" ></ion-searchbar>
+    </div>
+    <div class="filter-evt">
+        <img [src]="yesPath" class="filter-img" (tap)="toggleFilter(1)" (press)="activeFilter(1)"/>
+        <img [src]="maybePath" class="filter-img" (tap)="toggleFilter(2)" (press)="activeFilter(2)"/>
+        <img [src]="noPath" class="filter-img" (tap)="toggleFilter(0)" (press)="activeFilter(0)"/>
+    </div>
+    
+    <ion-scroll scrollY="true" class="evt-list"> 
+      
+      <ion-list>
+          <ion-item-sliding *ngFor="let event of viewEvents">
+                  <ion-item (tap)="showDetailEvent(event.info.id)">
+                  <ion-avatar item-left>
+                      <img src="http://www.chillter.com/api/images/chill-{{event.info.logo}}.svg">
+                  </ion-avatar>
+                  <div style="display:inline-block;float:left;">
+                  <h2 *ngIf="event.info.chillerid != myId">{{event.info.chiller}}</h2>
+                  <h2 *ngIf="event.info.chillerid == myId">Me</h2>
+                  <p>{{event.info.name}}</p>
+                  </div>
+                  <div class="right-info">
+                    <i class="soon">{{event.date | toNow}}</i>
+                    <i><img src="{{event.status | statusImg}}" class="status-img"/></i>
+                  </div>
+                  </ion-item>
+                  <ion-item-options side="left" *ngIf="event.info.chillerid == myId">
+                      <button ion-button outline (click)="showDeleteAlert(event.info.id)" color="white">
+                        <img src="images/close-outline.svg" height="20px"/>
+                      </button>
+                  </ion-item-options>
+                  <ion-item-options>
+                      <button ion-button outline color="white" (click)="participate(1,event.info.id)" *ngIf="event.status != 1">
+                          <img src="{{1 | statusImg}}" class="status-img"/>
+                      </button>
+                      <button ion-button outline color="white" (click)="participate(2,event.info.id)" *ngIf="event.status != 2">
+                          <img src="{{2 | statusImg}}" class="status-img"/>
+                      </button>
+                      <button ion-button outline color="white" (click)="participate(0,event.info.id)" *ngIf="event.status != 0">
+                          <img src="{{0 | statusImg}}" class="status-img"/>
+                      </button>
+                  </ion-item-options>
+              </ion-item-sliding>
+      </ion-list>
+    </ion-scroll>
+   
+</ion-content>

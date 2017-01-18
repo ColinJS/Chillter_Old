@@ -1,0 +1,35 @@
+.home {
+  
+}
+
+.conteneur{
+  position: relative;
+  margin:0px;
+  font-size:1.1rem;
+  color:$chillter-col;
+  height:calc((100vh - 200px) / 4);
+}
+
+.delete-icon{
+    background-image: url("../assets/images/close-outline.svg");
+    background-repeat: no-repeat;
+    height: 25px;
+    position: absolute;
+    top: 5%;
+    right: 5%;
+}
+
+.nav-title{
+    height: 8vh;
+    margin-top:10px;
+    padding: 0px 0px;
+}
+
+.swiper-pagination{
+    top:5px;
+    height:20px;
+}
+
+.swiper-pagination-bullet{
+    background:$chillter-col;
+}

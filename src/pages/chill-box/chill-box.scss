@@ -1,0 +1,69 @@
+.chill-box {
+
+}
+
+.chill-box .scroll-content{
+    overflow: hidden;
+    border:none;
+}
+
+.status-img{
+    height:3.7rem;
+    margin-left:20px;
+}
+
+.chill-box h2{
+    font-size: 2rem;
+    color: rgba(0,0,0,0.7);
+    font-weight:bold;
+    text-transform: capitalize;
+}
+.chill-box p{
+    font-size: 1.4rem;
+    font-weight:bold;
+    color: rgba(0,0,0,0.6);
+    text-transform: lowercase;
+}
+.chill-box .soon{
+    vertical-align: 50%;
+    font-size: 2.4rem;
+    color: rgba(0,0,0,0.6);
+    font-weight: bold;
+}
+
+.right-info{
+    height:100%;
+    display:inline-box;
+    float: right;
+    line-height: 100%;
+}
+
+.chill-box .search-evt{
+    margin-top: 5px;
+    float: left;
+    display: inline-block;
+    width: 61vw;
+    overflow: hidden;
+}
+
+.chill-box .filter-evt{
+    width: 35vw;
+    margin-top: 10px;
+    float: right;
+    display:inline-block;
+    margin-right:2.5vw;
+    padding: 0px 2px;
+}
+
+.chill-box .filter-img{
+    height:7.5vw;
+    //min-height: 5px;
+    display:inline-block;
+    max-height: 30px;
+    margin:0px 0.6vw;
+}
+
+.evt-list{
+    height:calc(100% - 3rem);
+    clear:both;
+}

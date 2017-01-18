@@ -1,0 +1,34 @@
+signin {
+    .avatar{
+        text-align:center;
+        overflow: hidden;
+    }
+
+    .avatar img-loader{
+    box-sizing:content-box;
+    border: 2px solid $chillter-col;
+    border-radius: 100%;
+    display:inline-block;
+    height:150px;
+    width:150px;
+    }
+
+    ion-item.input-has-focus ion-input,ion-item.input-has-focus ion-input[required]{
+        border: none;
+    }
+    ion-input.ng-valid[required]{
+        border-bottom: 1px solid green;
+    }
+
+    ion-input.ng-valid{
+        border-bottom: 1px solid green;
+    }
+
+    ion-input.ng-invalid{
+        border-bottom: 1px solid red;
+    }
+
+    ion-input.ng-pristine{
+        border:none;
+    }
+}

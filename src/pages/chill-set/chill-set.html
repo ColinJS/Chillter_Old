@@ -1,0 +1,62 @@
+<!--
+  Generated template for the ChillSetPage page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>
+        <img class="nav-title" src="images/nav-chillset.svg" height="130"/>
+    </ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content class="chill-set">
+  <ion-list padding>
+        <div class="avatar">
+            <img-loader id="avatarLoader" [src]="picture" border="2px" (change)="loadChange($event)"></img-loader>
+            <div class="valid-picture" *ngIf="pictChange" (tap)="sendPicture()">
+                <ion-icon name="checkmark" primary></ion-icon>
+            </div>
+            <div class="cancel-picture" *ngIf="pictChange" (tap)="cancelPicture()">
+                <ion-icon name="close" primary></ion-icon>
+            </div>
+        </div>
+        <div class="complete-name">
+            {{firstname}} {{lastname}}
+        </div>
+        <!--
+        <ion-item>
+            <ion-input placeholder="Firstname" type="text" [value]="firstname" (input)="firstname = $event.target.value" [disabled]="active"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-input placeholder="Lastname" type="text" [value]="lastname" (input)="lastname = $event.target.value" [disabled]="active"></ion-input>
+        </ion-item>
+        -->
+        <ion-item>
+            <ion-input placeholder="Phone" type="tel"  [value]="phone" (input)="phone = $event.target.value;change()"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-input placeholder="Email" type="email" [value]="email" (input)="email = $event.target.value;change()"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="haveChange" class="item-info">
+            <div class="cancel-info" (tap)="cancelInfo()">
+                Cancel
+            </div>
+            <div class="update-info" (tap)="changeInfo()">
+                Update
+            </div>
+        </ion-item>
+        <ion-item class="change-password" (tap)="changePassword()">
+                Change password
+        </ion-item>
+    </ion-list>
+    <div class="btn-disconnect-contener">
+        <div class="btn-disconnect" (tap)="logout()">
+          Sign Out
+        </div>
+      </div>
+</ion-content>

@@ -1,0 +1,24 @@
+<ion-content>
+    <img src="images/logo-sun.svg" class="logo-sun"/>
+    <img src="images/logo-text.svg" class="logo-text"/>
+    <ion-list class="login-list">
+        <ion-item class="login-item">
+            <ion-input type="text" placeholder="Email" [value]="email" (input)="email = $event.target.value"></ion-input>
+        </ion-item>
+        <ion-item class="login-item">
+            <ion-input type="password" placeholder="Password" [value]="password" (input)="password = $event.target.value"></ion-input>
+        </ion-item>
+     </ion-list>  
+     <div class="feedback-alert" *ngIf="authAlert">
+         Your email or password seems to be wrong.<br />
+         Try again :)
+     </div>
+     <button ion-button outline (click)="logIn()" class="log-btn" block round large>Log In</button>
+    
+    
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+      <a (click)="showSignUp()" class="login-tab">Create an account</a>
+  </ion-toolbar>
+</ion-footer>

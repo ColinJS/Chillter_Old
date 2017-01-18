@@ -1,0 +1,65 @@
+<!--
+  Generated template for the ChillDetailPage page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+
+<ion-content class="chill-detail" scroll="false">
+    <div class="chills-header">
+            
+        <div class="ch-background">
+            <img id="background" [src]="banner"/>
+        </div>
+        <div class="ch-logo">
+            <img id="logo" [src]="logo"/>
+        </div>
+        
+    </div>
+    <div class="invite" padding (swipe)="swipeEvent($event)">
+        
+        <div #leftPan class="overlay leftpan" [style.opacity]="sendOpa" [style.transform]="sendPos"></div>
+
+        <div class="invite-header">
+            <h1 class="upper">{{name}}</h1>
+            <h2>You're invited by <i class="creator">{{firstName}} {{lastName}}</i></h2>
+        </div>
+        
+        <div class="invite-geo">
+            <h1>{{geo}}</h1>
+            <h2>{{geoSpec}}</h2>
+        </div>
+        
+        <div class="invite-time">
+            <div class="invite-time-left"><i class="invite-day">{{day}}</i> à <i class="invite-hours">{{hours}}</i><i class="exp">h</i><i class="invite-minutes">{{min}}</i></div>
+            <div class="invite-time-right">{{soonDate | toNow}}</div>
+        </div>
+        
+        <div class="invite-com" text-justify>
+          <ion-scroll scrollY="true"  >
+            {{comment}}
+          </ion-scroll>
+        </div>
+        <div class="invite-utils">
+            <img src="images/tool-car-outline.svg" (tap)="showUtils(0)"/>
+            <img src="images/tool-list-outline.svg" (tap)="showUtils(1)"/>
+            <img src="images/tool-pig-outline.svg" (tap)="showUtils(2)"/>
+        </div>
+        <div class="invite-friends">
+           <img src="http://www.chillter.com/api/images/chill-plus.svg" *ngIf="mine" (tap)="showFriends()"/>
+           <div class="ion-scroll-friends">
+                <div class="ion-scroll-content">
+                    <div  *ngFor="let friend of friends" class="friend-list-img">
+                        <img src="{{friend.picture}}"  (tap)="showChillerDetails(friend.id)"/>
+                        <div class="status-icon">
+                             <img src="{{friend.status | statusImg}}"/>
+                        </div>
+                        <div class="delete-friend" (tap)="deleteFriend(friend.id)" *ngIf="mine">
+                            <img src="images/close-outline.svg"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ion-content>
