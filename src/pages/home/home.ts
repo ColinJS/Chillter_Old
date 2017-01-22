@@ -118,6 +118,7 @@ export class Home {
   addChill(chill: any){
       
       //little piece of code to add logo to the two dimensionnal array sliders
+      
       let lgt = this.slides.length
       let inLgt = this.slides[lgt-1].length
       
@@ -150,11 +151,13 @@ export class Home {
                   console.log(data);
               }
           },
-          err => this.http.logError(err)
+          err => this.http.logError(err),
+          ()=>{
+              //reset the "sliders" with real data to make sure there's no difference between localStorage and server
+              this.getHome();
+          }
       )
       
-      //reset the "sliders" with real data to make sure there's no difference between localStorage and server
-      this.getHome()
       
   }
   
@@ -164,6 +167,7 @@ export class Home {
       if(this.deleting){return}
       this.deleting = true
       // again little piece of code to delete the chill from the two-dimensionnal array sliders
+      
       let moveArray = [];
       let tmpMoved = [];
       
@@ -193,7 +197,7 @@ export class Home {
       }
       
       //update the sliders array without waiting for the server response
-      this.changeSlides(tmpMoved)
+      //this.changeSlides(tmpMoved)
       
       //send it to the server
       //body request
@@ -223,11 +227,13 @@ export class Home {
           err => {
               this.http.logError(err)
               this.deleting = false;
+          },
+          ()=>{
+              //reset the "sliders" with real data to make sure there's no difference between localStorage and server
+              this.getHome();
           }
       )
-      
-      //reset the "sliders" with real data to make sure there's no difference between localStorage and server
-      this.getHome()
+
       this.deleteMode = false;
   }
   

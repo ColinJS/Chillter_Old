@@ -9,12 +9,12 @@
 <ion-toolbar>
     <ion-title>{{title}}</ion-title>
     <ion-buttons>
-            <button (click)="close()">
+            <button ion-button (click)="close()">
                 <img src="images/close-outline.svg" height="25px"/>
             </button>
     </ion-buttons>
     <ion-buttons *ngIf="expensesPage" end>
-            <button (click)="resolve()">
+            <button ion-button (click)="resolve()">
                 res
             </button>
     </ion-buttons>
@@ -47,7 +47,7 @@
                 </div>
             </div>
             <div *ngIf="addCarBool">
-                <input [(ngModel)]="seats" class="seats-utils" placeholder="seats">
+                <ion-input type="number" [(ngModel)]="seats" class="seats-utils" placeholder="seats"></ion-input>
                 <div class="add-car" (tap)="addCar()">
                     Add
                 </div>
