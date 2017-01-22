@@ -73,13 +73,16 @@ export class HttpProvider {
     
   sendPicture(url:string ,file: any,token:any ,params: any) {
       
-        let ft = new Transfer();
+        console.log("File to send: "+file);
         
+        let ft = new Transfer();
         let paramString = this.resolveParam(params);
         
          let options = {
             fileKey:"photo",
-            headers: {'X-Token':token}
+            headers: {'X-Token':token},
+            chunkedMode:false,
+            multipartMode:true
         };
         
         let uri = encodeURI(this.api+url+paramString);
