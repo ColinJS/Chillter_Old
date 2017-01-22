@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController,App,ViewController,NavParams,ModalController,ToastController } from 'ionic-angular';
 import {ImgLoader} from '../../components/img-loader/img-loader';
 import { HttpProvider } from '../../providers/http-provider/http-provider';
-import { DatePicker } from 'ionic-native';
+import { DatePicker,Keyboard } from 'ionic-native';
 import {ViewChildren,ViewChild} from '@angular/core';
 import {AskFriends} from '../ask-friends/ask-friends';
 import {ChillUtils} from "../chill-utils/chill-utils";

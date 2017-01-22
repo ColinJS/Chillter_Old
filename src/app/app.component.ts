@@ -30,9 +30,9 @@ export class ChillterApp {
         this.rootPage = LogIn;
       }
       Splashscreen.hide();
-      StatusBar.hide()
+      //StatusBar.hide()
       ScreenOrientation.lockOrientation('portrait-primary');
-      Keyboard.hideKeyboardAccessoryBar(true);
+      Keyboard.hideKeyboardAccessoryBar(false);
       Keyboard.disableScroll(true)
     });
   }
