@@ -10,7 +10,8 @@
 }
 
 .inheriters-list{
-    margin: 3rem;
+    width:80%;
+    margin: auto;
     margin-top: 2rem;
     padding-top:1rem;
     border-top: 1px solid $chillter-col;
@@ -54,7 +55,7 @@
 
 .price-utils{
     border: none;
-    width: 15vmin;
+    width: 35vmin;
     margin: 0px 5vw;
 }
 
@@ -63,5 +64,5 @@
 }
 
 .add-exp-scroll{
-    width:100%;
+    width:100%!important;
 }
