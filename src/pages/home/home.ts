@@ -13,6 +13,8 @@ import {EditChills} from '../edit-chills/edit-chills';
 })
 export class Home {
   
+  isTapping: boolean = false;
+
   token: any = localStorage.getItem("_token");
   id: any = localStorage.getItem("_id");
   
@@ -241,7 +243,7 @@ export class Home {
   // and to "showList"" if it's the "Add" chill
   //on "click"
   tapDistrib(clicker: any){
-      
+      this.isTapping = true;
       if(clicker.link.plus){
           this.deleteMode = false;
           this.showList();
@@ -253,9 +255,11 @@ export class Home {
             this.showEditChills(clicker);
         }
       }
+
   }
   
   pressDistrib(clicker: any){
+      if(this.isTapping){return false}
       if(clicker.link.plus){
           this.deleteMode = false;
           return;
@@ -269,6 +273,7 @@ export class Home {
       let modal = this.modal.create(EditChills,{chill:chill});
       modal.onDidDismiss(()=>{
           Keyboard.close()
+          this.isTapping = false
       });
       modal.present()
   }
@@ -284,11 +289,10 @@ export class Home {
               console.log("ok")
               this.addChill(data); 
           }
-          
+          this.isTapping = false
       });
       
       listmodal.present();
-      
   }
   
   logout(){

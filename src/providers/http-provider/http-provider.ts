@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http,Headers } from '@angular/http';
 import { Transfer } from 'ionic-native';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/toPromise';
 
 /*
   Generated class for the HttpProvider provider.
@@ -74,20 +75,32 @@ export class HttpProvider {
   sendPicture(url:string ,file: any,token:any ,params: any) {
       
         console.log("File to send: "+file);
+
+        let fileExtension = file.substr(file.lastIndexOf('.')+1);
+        let firstDirectory = file.substr(0,file.indexOf('/'));
+
+        console.log("Extension => "+fileExtension+" , Directory => "+firstDirectory);
+
+        file = fileExtension == "svg" || firstDirectory == "images" ? "" : file ;
+
         
-        let ft = new Transfer();
-        let paramString = this.resolveParam(params);
-        
-         let options = {
-            fileKey:"photo",
-            headers: {'X-Token':token},
-            chunkedMode:false,
-            multipartMode:true
-        };
-        
-        let uri = encodeURI(this.api+url+paramString);
-        
-        return ft.upload(file,uri,options, false);
+        if(file == ""){
+          return this.post(url,{},params).toPromise();
+        }else{
+          let ft = new Transfer();
+          let paramString = this.resolveParam(params);
+          
+          let options = {
+              fileKey:"photo",
+              headers: {'X-Token':token},
+              chunkedMode:false,
+              multipartMode:true
+          };
+          
+          let uri = encodeURI(this.api+url+paramString);
+
+          return ft.upload(file,uri,options, false);
+        }
     }
 
   logError(err){

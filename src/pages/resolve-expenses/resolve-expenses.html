@@ -9,16 +9,18 @@
   <ion-toolbar>
     <ion-title>Resolve</ion-title>
   </ion-toolbar>
-
+  <ion-buttons>
+            <button ion-button (click)="close()">
+                <img src="images/close-outline.svg" height="25px"/>
+            </button>
+    </ion-buttons>
 </ion-header>
 
-<ion-content padding class="resolve-expenses" (swipe)="swipeEvent($event)">
-  
-  <ul class="res-list">
-    <li *ngFor="let p of pay" class="res-li">
-      <div class="res-chiller"><i class="from">{{p.from.firstname}}</i> => <i class="to">{{p.to.firstname}}</i></div>
-      <div class="res-pay">{{p.sum}} €</div>
-    </li>
-  </ul>
-  
+<ion-content padding class="resolve-expenses">
+    <ul class="res-list">
+      <li *ngFor="let p of pay" class="res-li">
+        <div class="res-chiller"><i class="from">{{p.from.firstname}}</i> => <i class="to">{{p.to.firstname}}</i></div>
+        <div class="res-pay">{{p.sum}} €</div>
+      </li>
+    </ul>
 </ion-content>

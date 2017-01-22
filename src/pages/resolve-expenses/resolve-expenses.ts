@@ -130,6 +130,7 @@ export class ResolveExpenses {
           }
           
           negList[n].credit=tmpCredit;
+          tmpPay.sum = (Math.round(tmpPay.sum*100)/100)
           otherTmp.push(tmpPay);
           break;
         }
