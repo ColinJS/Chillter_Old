@@ -5,6 +5,7 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { LogIn } from '../pages/login/login';
 import { Keyboard } from 'ionic-native';
 
+
 @Component({
   templateUrl: 'app.html',
 })
@@ -12,7 +13,7 @@ import { Keyboard } from 'ionic-native';
 export class ChillterApp {
   rootPage: any = LogIn;
 
-  constructor(platform: Platform) {
+  constructor( platform: Platform) {
     
     let token = localStorage.getItem("_token");
     let id = localStorage.getItem("_id");
@@ -34,6 +35,7 @@ export class ChillterApp {
       ScreenOrientation.lockOrientation('portrait-primary');
       Keyboard.hideKeyboardAccessoryBar(false);
       Keyboard.disableScroll(true)
+      
     });
   }
 }

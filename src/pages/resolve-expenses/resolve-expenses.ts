@@ -110,6 +110,7 @@ export class ResolveExpenses {
           }
           
           toSplice.push(n);
+          tmpPay.sum = (Math.trunc(tmpPay.sum*100)/100)
           otherTmp.push(tmpPay);
           break;
           
@@ -120,6 +121,7 @@ export class ResolveExpenses {
             "sum":Math.abs(negList[n].credit)
           }
           toSplice.push(n);
+          tmpPay.sum = (Math.trunc(tmpPay.sum*100)/100)
           otherTmp.push(tmpPay);
         }else{
           
@@ -130,7 +132,7 @@ export class ResolveExpenses {
           }
           
           negList[n].credit=tmpCredit;
-          tmpPay.sum = (Math.round(tmpPay.sum*100)/100)
+          tmpPay.sum = (Math.trunc(tmpPay.sum*100)/100)
           otherTmp.push(tmpPay);
           break;
         }

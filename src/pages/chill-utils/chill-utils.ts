@@ -146,7 +146,7 @@ export class ChillUtils {
                 
                 for(let c in this.cars){
                   if((this.cars[c].passengers.length < (parseInt(this.cars[c].seats)-1)) && this.addCarBool){
-                    this.cars[c].passengers.push({id:"add",picture:"images/close-outline.svg"})
+                    this.cars[c].passengers.push({id:"add",picture:"images/chill-plus.svg"})
                   }
                 }
                 console.log(this.cars)

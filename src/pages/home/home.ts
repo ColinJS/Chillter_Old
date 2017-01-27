@@ -6,6 +6,7 @@ import { HttpProvider } from '../../providers/http-provider/http-provider';
 
 import {ChillList} from '../chill-list/chill-list';
 import {EditChills} from '../edit-chills/edit-chills';
+import { Push, PushToken } from '@ionic/cloud-angular';
 
 @Component({
     selector:"home",
@@ -23,7 +24,7 @@ export class Home {
   idList: any[] =[];
   deleteMode: boolean = false; 
   
-  constructor( public notif: Events,public http: HttpProvider,public nav: NavController,public modal: ModalController) {
+  constructor( public push: Push,public notif: Events,public http: HttpProvider,public nav: NavController,public modal: ModalController) {
     
       //test this information and pop the log if doesn't exist
       if(this.token==null){
@@ -33,7 +34,25 @@ export class Home {
       }
     
   }
-  
+
+  registerPush(){
+
+        this.push.register().then((t: PushToken) => {
+            this.http.post("/chillers/"+this.id+"/notification/token",{"sender_id":t},[]).subscribe(
+                (data)=>{
+                    console.log(data);
+                },
+                (err)=>{
+
+                },
+                ()=>{}
+            );
+            return this.push.saveToken(t);
+        }).then((t: PushToken) => {
+            console.log('Token saved:', t.token);
+        });
+        
+  }
   //take the home chills (logo of event) from the dataBase
   getHome(){
       //re-store the local token
@@ -55,6 +74,7 @@ export class Home {
                 if(data){
                     this.changeSlides(data)
                 }
+                this.registerPush()
             },
             res => {
                 console.log(res.status)

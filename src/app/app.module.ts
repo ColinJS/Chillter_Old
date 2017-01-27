@@ -1,3 +1,4 @@
+
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 
@@ -26,6 +27,26 @@ import { ToNow } from '../pipes/toNow'
 import { HttpProvider } from '../providers/http-provider/http-provider'
 import { Storage } from '@ionic/storage';
 
+import { CloudSettings, CloudModule, PushToken,Push } from '@ionic/cloud-angular';
+
+const cloudSettings: CloudSettings = {
+  'core': {
+    'app_id': 'a389d29d'
+  },
+  'push': {
+    'sender_id': '606436592245',
+    'pluginConfig': {
+      'ios': {
+        'badge': true,
+        'sound': true
+      },
+      'android': {
+        'iconColor': '#343434'
+      }
+    }
+  }
+};
+
 @NgModule({
   declarations: [
     ChillterApp,
@@ -47,14 +68,16 @@ import { Storage } from '@ionic/storage';
     TabsPage,
     ImgLoader,
     StatusImg,
-    ToNow
+    ToNow,
+
   ],
   imports: [
     IonicModule.forRoot(ChillterApp,{
     mode: "ios",
     tabbarPlacement: "bottom",
     pageTansition: "ios"
-  })
+  }),
+    CloudModule.forRoot(cloudSettings)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -78,7 +101,6 @@ import { Storage } from '@ionic/storage';
   ],
   providers: [
     HttpProvider,
-    //Storage,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
     ]
 })
