@@ -128,7 +128,6 @@ export class ChillBox {
           }
       );
       this.notif.publish("notif:update");
-    
   }
   
   getEvents(ref: any=false){

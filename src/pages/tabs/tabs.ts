@@ -31,27 +31,14 @@ export class TabsPage {
   constructor(public navCtrl: NavController,public http: HttpProvider,public notif: Events) {
     //this.getNotification()
     //this.autoNotif()
+    this.notif.subscribe("notif:update",()=>{
+      this.getNotification();
+    });
+    this.notif.subscribe("nav:login",()=>{
+      this.backToLogin();
+    });
   }
-  
-  ionViewLoaded(){
-    this.getNotification();
-    setInterval(
-      ()=>{
-        this.getNotification();
-      },60000);
-      this.notif.subscribe("notif:update",()=>{
-        this.getNotification();
-      });
-      this.notif.subscribe("nav:login",()=>{
-        this.backToLogin();
-      })
-  }
-  
-  autoNotif(){
-    this.getNotification()
-    this.timer = setTimeout(this.autoNotif(),600000);
-  }
-  
+
   getNotification(){
     //re-store the local token
       let token = localStorage.getItem("_token");

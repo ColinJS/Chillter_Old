@@ -51,6 +51,11 @@ export class Home {
         }).then((t: PushToken) => {
             console.log('Token saved:', t.token);
         });
+
+        this.push.rx.notification()
+        .subscribe((msg) => {
+            this.notif.publish("notif:update");
+        });
         
   }
   //take the home chills (logo of event) from the dataBase
@@ -74,6 +79,7 @@ export class Home {
                 if(data){
                     this.changeSlides(data)
                 }
+                this.notif.publish("notif:update");
                 this.registerPush()
             },
             res => {
