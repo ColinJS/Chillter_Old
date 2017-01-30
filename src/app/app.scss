@@ -27,6 +27,16 @@
 }
 
 @font-face {
+    font-family: 'MyBold'; 
+    src: url('../assets/fonts/MYRIADAB.TTF'); 
+}
+
+@font-face {
+    font-family: 'MyMedium'; 
+    src: url('../assets/fonts/MyriadMedium.ttf'); 
+}
+
+@font-face {
     font-family: 'chillter-font';
     src:    url('../assets/icons/chillter-font.eot?67flqu');
     src:    url('../assets/icons/chillter-font.eot?67flqu#iefix') format('embedded-opentype'),
@@ -80,4 +90,8 @@
 
 .has-refresher .scroll-content{
     border-top: none;
+}
+
+ion-item-options button.activated {
+    background-color:rgba(0,0,0,0.1)!important;
 }

@@ -18,128 +18,137 @@
         -make the possibility of change the order of logo
         -make the possibility of create group of logo
         -->
-             
-            <ion-row>
-                <ion-col width-33>
-                    <div class="conteneur" *ngIf="slide[0]">
-                    <img src="http://www.chillter.com/api/images/chill-{{slide[0].info.logo}}.svg" width="100%" (tap)="tapDistrib(slide[0])" (press)="pressDistrib(slide[0])"/>
-                    <i *ngIf="!slide[0].link.plus">{{slide[0].info.name}}</i>
-                    <div class="delete-icon" *ngIf="deleteMode && !slide[0].link.plus" (tap)="deleteChill(slide[0])">
+             <!--
+                <ion-row>
+                    <ion-col width-33>
+                        <div class="conteneur" *ngIf="slide[0]">
+                        <img src="http://www.chillter.com/api/images/chill-{{slide[0].info.logo}}.svg" width="100%" (tap)="tapDistrib(slide[0])" (press)="pressDistrib(slide[0])"/>
+                        <i *ngIf="!slide[0].link.plus">{{slide[0].info.name}}</i>
+                        <div class="delete-icon" *ngIf="deleteMode && !slide[0].link.plus" (tap)="deleteChill(slide[0])">
+                            <img src="images/close-outline.svg"/>
+                        </div>
+                        </div>
+                    </ion-col>
+                        
+                    <ion-col width-33><div class="conteneur" *ngIf="slide[1]">
+                        
+                        <img src="http://www.chillter.com/api/images/chill-{{slide[1].info.logo}}.svg" width="100%" (tap)="tapDistrib(slide[1])" (press)="pressDistrib(slide[1])"/>
+                        {{slide[1].info.name}}
+                        <div class="delete-icon" *ngIf="deleteMode" (tap)="deleteChill(slide[1])">
+                            <img src="images/close-outline.svg"/>
+                        </div>
+                        </div>
+                    </ion-col>
+                    <ion-col width-33><div class="conteneur" *ngIf="slide[2]">
+                        
+                        <img src="http://www.chillter.com/api/images/chill-{{slide[2].info.logo}}.svg" width="100%" (tap)="tapDistrib(slide[2])" (press)="pressDistrib(slide[2])"/>
+                        {{slide[2].info.name}}
+                        <div class="delete-icon" *ngIf="deleteMode" (tap)="deleteChill(slide[2])">
+                            <img src="images/close-outline.svg"/>
+                        </div>
+                        </div>
+                    </ion-col>
+                </ion-row>
+                
+                <ion-row>
+                    <ion-col width-33><div class="conteneur" *ngIf="slide[3]">
+                        
+                        <img src="http://www.chillter.com/api/images/chill-{{slide[3].info.logo}}.svg" width="100%" (tap)="tapDistrib(slide[3])" (press)="pressDistrib(slide[3])"/>
+                        {{slide[3].info.name}}
+                        <div class="delete-icon" *ngIf="deleteMode" (tap)="deleteChill(slide[3])">
+                            <img src="images/close-outline.svg"/>
+                        </div>
+                        </div>
+                    </ion-col>
+                    <ion-col width-33><div class="conteneur" *ngIf="slide[4]">
+                        
+                        <img src="http://www.chillter.com/api/images/chill-{{slide[4].info.logo}}.svg" width="100%" (tap)="tapDistrib(slide[4])" (press)="pressDistrib(slide[4])"/>
+                        {{slide[4].info.name}}
+                        <div class="delete-icon" *ngIf="deleteMode" (tap)="deleteChill(slide[4])">
+                            <img src="images/close-outline.svg"/>
+                        </div>
+                        </div>
+                    </ion-col>
+                    <ion-col width-33><div class="conteneur" *ngIf="slide[5]">
+                        
+                        <img src="http://www.chillter.com/api/images/chill-{{slide[5].info.logo}}.svg" width="100%" (tap)="tapDistrib(slide[5])" (press)="pressDistrib(slide[5])"/>
+                        {{slide[5].info.name}}
+                        <div class="delete-icon" *ngIf="deleteMode" (tap)="deleteChill(slide[5])">
+                            <img src="images/close-outline.svg"/>
+                        </div>
+                        </div>
+                    </ion-col>
+                </ion-row>
+                
+                <ion-row>
+                    <ion-col width-33><div class="conteneur" *ngIf="slide[6]">
+                        
+                        <img src="http://www.chillter.com/api/images/chill-{{slide[6].info.logo}}.svg" width="100%" (tap)="tapDistrib(slide[6])" (press)="pressDistrib(slide[6])"/>
+                        {{slide[6].info.name}}
+                        <div class="delete-icon" *ngIf="deleteMode" (tap)="deleteChill(slide[6])">
+                            <img src="images/close-outline.svg"/>
+                        </div>
+                        </div>
+                    </ion-col>
+                    <ion-col width-33><div class="conteneur" *ngIf="slide[7]">
+                        
+                        <img src="http://www.chillter.com/api/images/chill-{{slide[7].info.logo}}.svg" width="100%" (tap)="tapDistrib(slide[7])" (press)="pressDistrib(slide[7])"/>
+                        {{slide[7].info.name}}
+                        <div class="delete-icon" *ngIf="deleteMode" (tap)="deleteChill(slide[7])">
+                            <img src="images/close-outline.svg"/>
+                        </div>
+                        </div>
+                    </ion-col>
+                    <ion-col width-33><div class="conteneur" *ngIf="slide[8]">
+                        
+                        <img src="http://www.chillter.com/api/images/chill-{{slide[8].info.logo}}.svg" width="100%" (tap)="tapDistrib(slide[8])" (press)="pressDistrib(slide[8])"/>
+                        {{slide[8].info.name}}
+                        <div class="delete-icon" *ngIf="deleteMode" (tap)="deleteChill(slide[8])">
+                            <img src="images/close-outline.svg"/>
+                        </div>
+                        </div>
+                    </ion-col>
+                </ion-row>
+                
+                <ion-row>
+                    <ion-col width-33><div class="conteneur" *ngIf="slide[9]">
+                        
+                        <img src="http://www.chillter.com/api/images/chill-{{slide[9].info.logo}}.svg" width="100%" (tap)="tapDistrib(slide[9])" (press)="pressDistrib(slide[9])"/>
+                        {{slide[9].info.name}}
+                        <div class="delete-icon" *ngIf="deleteMode" (tap)="deleteChill(slide[9])">
+                            <img src="images/close-outline.svg"/>
+                        </div>
+                        </div>
+                    </ion-col>
+                    <ion-col width-33><div class="conteneur" *ngIf="slide[10]">
+                        
+                        <img src="http://www.chillter.com/api/images/chill-{{slide[10].info.logo}}.svg" width="100%" (tap)="tapDistrib(slide[10])" (press)="pressDistrib(slide[10])"/>
+                        {{slide[10].info.name}}
+                        <div class="delete-icon" *ngIf="deleteMode" (tap)="deleteChill(slide[10])">
+                            <img src="images/close-outline.svg"/>
+                        </div>
+                        </div>
+                    </ion-col>
+                    <ion-col width-33><div class="conteneur" *ngIf="slide[11]">
+                        
+                        <img src="http://www.chillter.com/api/images/chill-{{slide[11].info.logo}}.svg" width="100%" (tap)="tapDistrib(slide[11])" (press)="pressDistrib(slide[11])"/>
+                        {{slide[11].info.name}}
+                        <div class="delete-icon" *ngIf="deleteMode" (tap)="deleteChill(slide[11])">
+                            <img src="images/close-outline.svg"/>
+                        </div>
+                        </div>
+                    </ion-col>
+                </ion-row> 
+            -->
+            <div class="chill-flex">
+                <div class="chill-contain" *ngFor="let s of slide">
+                    <img src="http://www.chillter.com/api/images/chill-{{s.info.logo}}.svg" width="100%" (tap)="tapDistrib(s)" (press)="pressDistrib(s)"/>
+                    {{s.info.name}}
+                    <div class="delete-icon" *ngIf="deleteMode" (tap)="deleteChill(s)">
                         <img src="images/close-outline.svg"/>
                     </div>
-                    </div>
-                </ion-col>
-                    
-                <ion-col width-33><div class="conteneur" *ngIf="slide[1]">
-                    
-                    <img src="http://www.chillter.com/api/images/chill-{{slide[1].info.logo}}.svg" width="100%" (tap)="tapDistrib(slide[1])" (press)="pressDistrib(slide[1])"/>
-                    {{slide[1].info.name}}
-                    <div class="delete-icon" *ngIf="deleteMode" (tap)="deleteChill(slide[1])">
-                        <img src="images/close-outline.svg"/>
-                    </div>
-                    </div>
-                </ion-col>
-                <ion-col width-33><div class="conteneur" *ngIf="slide[2]">
-                    
-                    <img src="http://www.chillter.com/api/images/chill-{{slide[2].info.logo}}.svg" width="100%" (tap)="tapDistrib(slide[2])" (press)="pressDistrib(slide[2])"/>
-                    {{slide[2].info.name}}
-                    <div class="delete-icon" *ngIf="deleteMode" (tap)="deleteChill(slide[2])">
-                        <img src="images/close-outline.svg"/>
-                    </div>
-                    </div>
-                </ion-col>
-            </ion-row>
-            
-            <ion-row>
-                <ion-col width-33><div class="conteneur" *ngIf="slide[3]">
-                    
-                    <img src="http://www.chillter.com/api/images/chill-{{slide[3].info.logo}}.svg" width="100%" (tap)="tapDistrib(slide[3])" (press)="pressDistrib(slide[3])"/>
-                    {{slide[3].info.name}}
-                    <div class="delete-icon" *ngIf="deleteMode" (tap)="deleteChill(slide[3])">
-                        <img src="images/close-outline.svg"/>
-                    </div>
-                    </div>
-                </ion-col>
-                <ion-col width-33><div class="conteneur" *ngIf="slide[4]">
-                    
-                    <img src="http://www.chillter.com/api/images/chill-{{slide[4].info.logo}}.svg" width="100%" (tap)="tapDistrib(slide[4])" (press)="pressDistrib(slide[4])"/>
-                    {{slide[4].info.name}}
-                    <div class="delete-icon" *ngIf="deleteMode" (tap)="deleteChill(slide[4])">
-                        <img src="images/close-outline.svg"/>
-                    </div>
-                    </div>
-                </ion-col>
-                <ion-col width-33><div class="conteneur" *ngIf="slide[5]">
-                    
-                    <img src="http://www.chillter.com/api/images/chill-{{slide[5].info.logo}}.svg" width="100%" (tap)="tapDistrib(slide[5])" (press)="pressDistrib(slide[5])"/>
-                    {{slide[5].info.name}}
-                    <div class="delete-icon" *ngIf="deleteMode" (tap)="deleteChill(slide[5])">
-                        <img src="images/close-outline.svg"/>
-                    </div>
-                    </div>
-                </ion-col>
-            </ion-row>
-            
-            <ion-row>
-                <ion-col width-33><div class="conteneur" *ngIf="slide[6]">
-                    
-                    <img src="http://www.chillter.com/api/images/chill-{{slide[6].info.logo}}.svg" width="100%" (tap)="tapDistrib(slide[6])" (press)="pressDistrib(slide[6])"/>
-                    {{slide[6].info.name}}
-                    <div class="delete-icon" *ngIf="deleteMode" (tap)="deleteChill(slide[6])">
-                        <img src="images/close-outline.svg"/>
-                    </div>
-                    </div>
-                </ion-col>
-                <ion-col width-33><div class="conteneur" *ngIf="slide[7]">
-                    
-                    <img src="http://www.chillter.com/api/images/chill-{{slide[7].info.logo}}.svg" width="100%" (tap)="tapDistrib(slide[7])" (press)="pressDistrib(slide[7])"/>
-                    {{slide[7].info.name}}
-                    <div class="delete-icon" *ngIf="deleteMode" (tap)="deleteChill(slide[7])">
-                        <img src="images/close-outline.svg"/>
-                    </div>
-                    </div>
-                </ion-col>
-                <ion-col width-33><div class="conteneur" *ngIf="slide[8]">
-                    
-                    <img src="http://www.chillter.com/api/images/chill-{{slide[8].info.logo}}.svg" width="100%" (tap)="tapDistrib(slide[8])" (press)="pressDistrib(slide[8])"/>
-                    {{slide[8].info.name}}
-                    <div class="delete-icon" *ngIf="deleteMode" (tap)="deleteChill(slide[8])">
-                        <img src="images/close-outline.svg"/>
-                    </div>
-                    </div>
-                </ion-col>
-            </ion-row>
-            
-            <ion-row>
-                <ion-col width-33><div class="conteneur" *ngIf="slide[9]">
-                    
-                    <img src="http://www.chillter.com/api/images/chill-{{slide[9].info.logo}}.svg" width="100%" (tap)="tapDistrib(slide[9])" (press)="pressDistrib(slide[9])"/>
-                    {{slide[9].info.name}}
-                    <div class="delete-icon" *ngIf="deleteMode" (tap)="deleteChill(slide[9])">
-                        <img src="images/close-outline.svg"/>
-                    </div>
-                    </div>
-                </ion-col>
-                <ion-col width-33><div class="conteneur" *ngIf="slide[10]">
-                    
-                    <img src="http://www.chillter.com/api/images/chill-{{slide[10].info.logo}}.svg" width="100%" (tap)="tapDistrib(slide[10])" (press)="pressDistrib(slide[10])"/>
-                    {{slide[10].info.name}}
-                    <div class="delete-icon" *ngIf="deleteMode" (tap)="deleteChill(slide[10])">
-                        <img src="images/close-outline.svg"/>
-                    </div>
-                    </div>
-                </ion-col>
-                <ion-col width-33><div class="conteneur" *ngIf="slide[11]">
-                    
-                    <img src="http://www.chillter.com/api/images/chill-{{slide[11].info.logo}}.svg" width="100%" (tap)="tapDistrib(slide[11])" (press)="pressDistrib(slide[11])"/>
-                    {{slide[11].info.name}}
-                    <div class="delete-icon" *ngIf="deleteMode" (tap)="deleteChill(slide[11])">
-                        <img src="images/close-outline.svg"/>
-                    </div>
-                    </div>
-                </ion-col>
-            </ion-row> 
-            
+                </div>
+            </div>
         </ion-slide>
 
     </ion-slides>

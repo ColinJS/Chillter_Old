@@ -46,7 +46,8 @@ export class EditChills{
     geo: string = "";
     geoSpec: string="";
     
-    day: string = "";
+    stringDay: string = "";
+    numberDay: string = "";
     hours: string = "";
     min: string = "";
     soon: string = "";
@@ -61,6 +62,8 @@ export class EditChills{
     friends: any = [];
     utils: any={"cars":[],"list":[]};
 
+    color: string="ff862a";
+
     swipeToastDone: boolean=false;
 
   constructor(public toastCtrl: ToastController, public mod: ModalController, public navCtrl: NavController,public viewCtrl: ViewController, public navParams: NavParams,public http: HttpProvider,public app: App) {
@@ -70,15 +73,21 @@ export class EditChills{
     this.getChill();
     this.getChillerInfo();
     
+    let myFriends = this.navParams.get("friends");
+    if(myFriends){
+        this.friends.push(myFriends);
+    }
+    
   }
 
   formatDate(){
       
-    let dayName = ["Sunday","Monday","Thuesday","Wednesday","Thursday","Friday","Saturday"];
+    let dayName = ["Sun.","Mon.","Tues.","Wed.","Thurs.","Fri.","Sat."];
     
     this.soonDate = new Date(this.eventDate.getTime())
     
-    this.day = dayName[this.eventDate.getDay()]+" "+(this.eventDate.getDate()).toString();
+    this.stringDay = dayName[this.eventDate.getDay()];
+    this.numberDay = (this.eventDate.getDate()).toString();
     this.hours=(this.eventDate.getHours()).toString();
     if(this.hours.length == 1){
         this.hours = "0"+this.hours
@@ -98,11 +107,13 @@ export class EditChills{
       this.http.get("/chills/"+tmpId,[]).subscribe(
           (data) => {
               if(data){
+                  console.log(data);
                   this.parentChill = data;
                   this.name = data.name;
                   this.logo = ("http://www.chillter.com/api/images/chill-"+data.logo+".svg");
                   this.banner = ("images/banner-"+data.category+".jpg");
-              }
+                  this.color = data.color;
+            }
           },
           err => this.http.logError(err)
       )
@@ -121,7 +132,6 @@ export class EditChills{
       
       this.http.get("/chillers/"+id,[]).subscribe(
           data => {
-              console.log(data);
               if(data){
                   this.creator = data;
                   this.firstName = data.firstname
@@ -169,7 +179,7 @@ export class EditChills{
               category:this.parentChill.category,
               logo:this.parentChill.logo,
               name:this.name,
-              color:this.parentChill.color,
+              color:this.color,
               banner:this.parentChill.banner,
               chillerId:id,
               place:this.geo,
@@ -244,11 +254,11 @@ export class EditChills{
         data =>{
             console.log(data);
             console.log("Picture was send ...");
-            this.close(false);
+            this.close(2);
         },
         (err)=>{
             console.log(err);
-            this.close(false);
+            this.close(2);
         });
     }
   }
@@ -420,16 +430,15 @@ export class EditChills{
 }
   
   
-  close(anim: boolean=true){
-      
-    if(anim){
-        this.animateTo("back",0);
-    }
-    setTimeout(()=>{
-        this.viewCtrl.dismiss();
-    }, 400);
-    
-    
+  close(anim: number=0,accept: string=""){
+      if(anim == 0){
+            this.animateTo("back",0);
+        }else if(anim == 1){
+            this.animateTo("send",0);
+        }
+        setTimeout(()=>{
+            this.viewCtrl.dismiss({"accept":accept});
+        }, 400);
   }
 
   

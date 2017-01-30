@@ -29,10 +29,10 @@
             <h2>{{pfriend.firstname}} {{pfriend.lastname}}</h2>
             </ion-item>
             <ion-item-options>
-                <button (click)="acceptFriend(pfriend.id)" white>
+                <button  ion-button outline color="white" (click)="acceptFriend(pfriend.id)" white>
                     <ion-icon name="checkmark" primary></ion-icon>
                 </button>
-                <button (click)="deleteFriend(pfriend.id)" white>
+                <button  ion-button outline color="white" (click)="deleteFriend(pfriend.id)" white>
                     <img src="images/close-outline.svg" height="20px"/>
                 </button>
             </ion-item-options>
@@ -55,7 +55,7 @@
                 <h2>{{friend.firstname}} {{friend.lastname}}</h2>
                 </ion-item>
                 <ion-item-options>
-                    <button ion-button (click)="showDeleteAlert(friend.id)" white>
+                    <button  ion-button outline color="white" (click)="showDeleteAlert(friend.id)" white>
                         <img src="images/close-outline.svg" height="20px"/>
                     </button>
                 </ion-item-options>

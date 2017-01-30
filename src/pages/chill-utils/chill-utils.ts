@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ViewController, NavParams, ModalController } from 'ionic-angular';
+import { NavController, ViewController, NavParams, ModalController, AlertController } from 'ionic-angular';
 import {HttpProvider} from '../../providers/http-provider/http-provider';
 import {ChillerDetails} from "../chiller-details/chiller-details";
 import {AddExpense} from "../add-expense/add-expense";
@@ -40,7 +40,7 @@ export class ChillUtils {
   creator: any;
   utilsObj: any;
   
-  constructor(public mod: ModalController, public http:HttpProvider, public nav: NavController, public viewCtrl:ViewController, public navParams: NavParams) {
+  constructor(public alertCtrl: AlertController, public mod: ModalController, public http:HttpProvider, public nav: NavController, public viewCtrl:ViewController, public navParams: NavParams) {
     
     let initialSlide = 0;
     
@@ -77,7 +77,7 @@ export class ChillUtils {
     
     switch (slideId){
       case 0:
-        this.title = "Covoit";
+        this.title = "Transport";
         this.expensesPage=false;
         if(!this.newMode){
             this.getCar();
@@ -272,9 +272,9 @@ export class ChillUtils {
       )
   }
   
-  addCar(){
+  addCar(seats: number){
     
-    if(!this.seats || this.seats == ""){
+    if(!seats){
         return false;
     }
     
@@ -283,7 +283,7 @@ export class ChillUtils {
         this.addCarBool = false;
         this.cars = [{
             "mine":true,
-            "seats":this.seats,
+            "seats":seats,
             "driver": {"id":this.creator.id,"firstname":this.creator.firstname,"picture":this.creator.picture},
             "passengers":[]
         }];
@@ -305,7 +305,7 @@ export class ChillUtils {
      
       let body={
         cars:{
-          seats:this.seats
+          seats:seats
         }
       }
        
@@ -436,9 +436,9 @@ export class ChillUtils {
       )
   }
   
-  addElement(){
+  addElement(element: string){
       
-    if(!this.element || this.element == ""){
+    if(!element){
         return false;
     }
     
@@ -446,9 +446,8 @@ export class ChillUtils {
         let elemId = this.list.length;
         this.list.push({
             "id":elemId,
-            "content":this.element,
+            "content":element,
         });
-        this.element = "";
         this.utilsObj.list = this.list;
         return
     }
@@ -467,7 +466,7 @@ export class ChillUtils {
      
       let body={
         "elements":[
-            this.element
+            element
         ]
       }
        
@@ -476,7 +475,6 @@ export class ChillUtils {
               console.log(data);
               if(data){
                   this.getList();
-                  this.element = "";
               }else{
               }
           },
@@ -618,27 +616,176 @@ export class ChillUtils {
       modal.present(modal)
       
   }
-  
-  showAddExp(){
-      
-      if(this.newMode){
-          return;
-      }
-      
-      let evtId = this.navParams.get("eventId");
-      let friends = this.navParams.get("friends");
-      
-      console.log(friends)
-      
-      let modal = this.mod.create(AddExpense,{"eventId":evtId,"friends":friends});
-        
-      modal.onDidDismiss(()=>{
-          this.getExps();
-      });
-      
-      modal.present()
+
+  addElementPrompt(){
+      let prompt = this.alertCtrl.create({
+      title: 'Add an element',
+      inputs: [
+        {
+          name: 'Element',
+          placeholder: 'Element',
+          type: 'text'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Add',
+          handler: data => {
+            this.addElement(data.Element)
+          }
+        }
+      ]
+    });
+    prompt.present();
   }
-  
+
+  addCarPrompt(){
+      let prompt = this.alertCtrl.create({
+      title: 'Add a car',
+      inputs: [
+        {
+          name: 'Seats',
+          placeholder: 'Seats',
+          type: 'number'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Add',
+          handler: data => {
+            this.addCar(data.Seats)
+          }
+        }
+      ]
+    });
+    prompt.present();
+  }
+
+    addExpensePrompt(){
+        let friends = this.navParams.get("friends");
+
+        let prompt = this.alertCtrl.create();
+
+        prompt.setTitle('Add an expense');
+
+        prompt.addInput({
+            name: 'Element',
+            placeholder: 'Element',
+            type: 'text'
+        });
+
+        prompt.addInput({
+            name: 'Price',
+            placeholder: 'Price',
+            type: 'number'
+        });
+
+        prompt.addButton({
+            text: 'Cancel',
+            handler: data => {
+                console.log('Cancel clicked');
+            }
+            });
+
+        prompt.addButton({
+            text: 'Add',
+            handler: data => {
+                this.addFriendsToExpensePrompt(data.Element,data.Price)
+            }
+            });
+
+        prompt.present();
+  }
+
+      addFriendsToExpensePrompt(element: string, price: string){
+        let friends = this.navParams.get("friends");
+
+        let prompt = this.alertCtrl.create();
+        prompt.setTitle('Add an expense');
+
+        for(let i=0; i<friends.length; i++){
+            prompt.addInput({
+                type: 'checkbox',
+                label: (friends[i].firstname+" "+friends[i].lastname),
+                value: ("value"+i.toString()),
+                checked: false
+            });
+        }
+
+        prompt.addButton({
+            text: 'Cancel',
+            handler: data => {
+                console.log('Cancel clicked');
+            }
+            });
+
+        prompt.addButton({
+            text: 'Add',
+            handler: data => {
+                let inheritersList = []
+                for(let i=0; i<friends.length; i++){
+                    if(data.indexOf("value"+i.toString()) > -1){
+                        inheritersList.push(friends[i]);
+                    }
+                }
+                this.addExpense(element,price,inheritersList)
+                
+            }
+            });
+
+        prompt.present();
+  }
+
+  addExpense(element: string, price: string, friends: any[]){
+     if(element == "" || price == ""){
+        return false;
+    }
+    
+    let evtId = this.navParams.get("eventId");
+
+    //re-store the local token
+      let token = localStorage.getItem("_token");
+      let id = localStorage.getItem("_id");
+      
+      //send the request to the server DataBase 
+      this.http.content("application/json")
+      this.http.token(token)
+     
+      let body={
+        expenses:[{
+          "element":element,
+          "price":price,
+          "inheriters":friends
+        }]
+      }
+       
+      this.http.post("/chillers/"+id+"/events/"+evtId+"/expenses", body ,[]).subscribe(
+          data => {
+              console.log(data);
+              if(data){
+                  this.getExps();
+              }
+          },
+          res => {
+              console.log(res.status)
+              if(res.status != 200){
+                  console.log("fuck");
+              }
+          });
+  }
+
    close(){
     this.viewCtrl.dismiss(this.utilsObj);
   }

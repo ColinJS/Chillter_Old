@@ -54,6 +54,7 @@ export class Home {
 
         this.push.rx.notification()
         .subscribe((msg) => {
+            console.log("Notification: "+msg);
             this.notif.publish("notif:update");
         });
         
@@ -325,6 +326,10 @@ export class Home {
       
       console.log("LogOut ...")
      
+      this.push.unregister().then(()=>{
+          console.log("unregister notifications.")
+      });
+
       localStorage.removeItem("_token")
       localStorage.removeItem("_id")
       this.notif.publish("nav:login");

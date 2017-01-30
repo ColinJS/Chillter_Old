@@ -33,3 +33,19 @@
 .swiper-pagination-bullet{
     background:$chillter-col;
 }
+
+.chill-flex{
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    padding: 0px 10px;
+}
+
+.chill-contain{
+    width: calc((95vmin / 3) - 3px);
+    font-size: 1.2rem;
+    margin-bottom: calc(((100vh - 250px) / 3) - ((95vmin / 3) - 3px));
+    color: $chillter-col;
+    position: relative;
+}

@@ -29,14 +29,14 @@ export class TabsPage {
   timer: any;
   
   constructor(public navCtrl: NavController,public http: HttpProvider,public notif: Events) {
-    //this.getNotification()
-    //this.autoNotif()
+    
     this.notif.subscribe("notif:update",()=>{
       this.getNotification();
     });
     this.notif.subscribe("nav:login",()=>{
       this.backToLogin();
     });
+    
   }
 
   getNotification(){
@@ -77,7 +77,8 @@ export class TabsPage {
   }
   
   backToLogin(){
-    this.navCtrl.popToRoot();
+    this.notif.unsubscribe("notif:update");
+    this.notif.unsubscribe("nav:login");
     this.navCtrl.setRoot(LogIn);
   }
 

@@ -18,7 +18,7 @@
 </ion-header>
 
 
-<ion-content class="chill-box" scrollY="false" scrollX="false">
+<ion-content class="chill-box">
     <ion-refresher (ionRefresh)="doRefresh($event)">
             <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
@@ -31,7 +31,7 @@
         <img [src]="noPath" class="filter-img" (tap)="toggleFilter(0)" (press)="activeFilter(0)"/>
     </div>
     
-    <ion-scroll scrollY="true" class="evt-list"> 
+    <!-- <ion-scroll scrollY="true" class="evt-list"> -->
       
       <ion-list>
           <ion-item-sliding *ngFor="let event of viewEvents">
@@ -67,6 +67,6 @@
                   </ion-item-options>
               </ion-item-sliding>
       </ion-list>
-    </ion-scroll>
+    <!-- </ion-scroll> -->
    
 </ion-content>

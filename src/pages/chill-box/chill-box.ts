@@ -1,7 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, List, ModalController, AlertController, Events } from 'ionic-angular';
+import { NavController, List, ModalController, AlertController, Events, ToastController } from 'ionic-angular';
 import { HttpProvider } from '../../providers/http-provider/http-provider';
 import { ChillDetail } from '../chill-detail/chill-detail';
+import {Calendar} from 'ionic-native';
 /*
   Generated class for the ChillBoxPage page.
 
@@ -29,7 +30,7 @@ export class ChillBox {
   
   @ViewChild(List) list: List
   
-  constructor(public notif: Events, public al: AlertController, public mod: ModalController, public nav: NavController, public http: HttpProvider) {
+  constructor(public toastCtrl: ToastController, public notif: Events, public al: AlertController, public mod: ModalController, public nav: NavController, public http: HttpProvider) {
       this.getEvents();
       this.myId = localStorage.getItem("_id");
       this.notif.subscribe("notif:events",()=>{
@@ -96,9 +97,27 @@ export class ChillBox {
     this.filterEvents();
   }
   
-  
+  capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
   participate(ind: number,eventId: any){
-    
+      let currentEvent
+      this.events.forEach((evt)=>{
+          if(evt.info.id == eventId){
+            currentEvent = evt;
+          }
+      })
+
+      let startDate = new Date(currentEvent.date);
+      startDate = new Date(startDate.getTime());
+
+      let title = this.capitalizeFirstLetter(currentEvent.info.name);
+      let notes = this.capitalizeFirstLetter(currentEvent.info.chiller)+" invite you to a "+this.capitalizeFirstLetter(currentEvent.info.name);
+
+      let calendarOptions = Calendar.getCalendarOptions()
+      calendarOptions.firstReminderMinutes = 60
+
      //re-store the local token
       let token = localStorage.getItem("_token");
       let id = localStorage.getItem("_id");
@@ -125,9 +144,29 @@ export class ChillBox {
               if(res.status != 200){
                   console.log("fuck");
               }
+          },
+          ()=>{
+            this.notif.publish("notif:update");
           }
       );
-      this.notif.publish("notif:update");
+
+      console.log(title+": "+notes+" a "+startDate);
+      if(ind == 0 || ind == 2){
+          let tmpEvent = Calendar.findEvent(title,"",notes,startDate,startDate).then((data)=>{
+            if(data.length > 0){
+              Calendar.deleteEvent(title,"",notes,startDate,startDate).then((d)=>{
+                this.showToast("The event was removed from your calendar");
+                console.log("The event was removed from your calendar");
+              });
+            }
+          })
+      }else if(ind == 1){
+          Calendar.createEventWithOptions(title,"",notes,startDate,startDate,calendarOptions).then((d)=>{
+            this.showToast("The event was added to your calendar");
+            console.log("The event was added to your calendar");
+          });
+      }
+
   }
   
   getEvents(ref: any=false){
@@ -145,7 +184,6 @@ export class ChillBox {
             
               console.log(data);
               if(data){
-                
                   this.events=data.filter((d)=>{
                     let now = new Date();
                     let tmpDate = new Date(d.date);
@@ -161,6 +199,21 @@ export class ChillBox {
                       return false;
                     }
                   });
+                  
+                  this.events.forEach((index)=>{
+                    let now = new Date()
+                    let nowPlusOne = new Date(now.getFullYear(),now.getMonth(),now.getDate(),24)
+                    let d = new Date(index.date)
+
+                    if(d<nowPlusOne){
+                      index.soon = "today"
+                    }else{
+                      index.soon = "later"
+                    }
+                  })
+
+                  console.log("event list: ")
+                  console.log(this.events)
                   
                   this.filterEvents();
                   
@@ -212,6 +265,16 @@ export class ChillBox {
   doRefresh(refresher){
     this.getEvents(refresher);
   }
+
+  showToast(message: string){
+    let toast = this.toastCtrl.create({
+      message: message,
+      duration: 3000,
+      position: 'top'
+    });
+
+    toast.present();
+  }
   
   showDeleteAlert(eventId: string){
     
@@ -233,7 +296,18 @@ export class ChillBox {
   
   showDetailEvent(eventId: string){
       let modal = this.mod.create(ChillDetail,{"eventId":eventId});
-      
+      modal.onDidDismiss((info)=>{
+        if(info){
+          switch(info.accept){
+            case "accept":
+              this.participate(1,eventId);
+              break;
+            case "refuse":
+              this.participate(0,eventId)
+              break;
+          }
+        }
+      })
       modal.present(modal)
   }
 }

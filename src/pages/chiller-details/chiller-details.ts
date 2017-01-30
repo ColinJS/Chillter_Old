@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController,NavParams,ViewController,ModalController } from 'ionic-angular';
-import {HttpProvider} from '../../providers/http-provider/http-provider';
-import {ChillDetail} from '../chill-detail/chill-detail';
+import { HttpProvider } from '../../providers/http-provider/http-provider';
+import { ChillDetail } from '../chill-detail/chill-detail';
+import { ChillList } from '../chill-list/chill-list';
+import { EditChills } from '../edit-chills/edit-chills';
 /*
   Generated class for the ChillerDetailsPage page.
 
@@ -25,7 +27,7 @@ export class ChillerDetails {
   comingEvents: any[] =[];
   historyEvents: any[] =[];
   
-  constructor(public mod:ModalController, public nav: NavController, public navParams: NavParams,public http:HttpProvider,public viewCtrl: ViewController) {
+  constructor(public modal:ModalController, public nav: NavController, public navParams: NavParams,public http:HttpProvider,public viewCtrl: ViewController) {
     
     this.getChillerInfo();
     
@@ -117,9 +119,24 @@ export class ChillerDetails {
   }
   
   showDetailEvent(eventId: string){
-      let modal = this.mod.create(ChillDetail,{"eventId":eventId});
+      let modal = this.modal.create(ChillDetail,{"eventId":eventId});
       
       modal.present(modal)
+  }
+
+  sendAChill(){
+
+      let modal = this.modal.create(ChillList);
+      modal.onDidDismiss((chill)=>{
+          if(chill){
+                let chillObj = {"link":{"chills":chill.info.id}}
+                let friendObj = {"id":this.navParams.get("friendId"),"firstname":this.firstName,"lastname":this.lastName,"picture":this.picture}
+
+                let editModal = this.modal.create(EditChills,{"chill":chillObj,"friends":friendObj})
+                editModal.present()
+          }
+      });
+      modal.present()
   }
   
   swipeEvent(evt){

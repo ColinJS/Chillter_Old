@@ -8,14 +8,9 @@
 
 <ion-toolbar>
     <ion-title>{{title}}</ion-title>
-    <ion-buttons>
+    <ion-buttons end>
             <button ion-button (click)="close()">
                 <img src="images/close-outline.svg" height="25px"/>
-            </button>
-    </ion-buttons>
-    <ion-buttons *ngIf="expensesPage" end>
-            <button ion-button (click)="resolve()">
-                res
             </button>
     </ion-buttons>
 </ion-toolbar>
@@ -46,14 +41,14 @@
                     </div>
                 </div>
             </div>
-            <div *ngIf="addCarBool">
-                <ion-input type="number" [(ngModel)]="seats" class="seats-utils" placeholder="seats"></ion-input>
-                <div class="add-car" (tap)="addCar()">
-                    Add
-                </div>
+            <div *ngIf="addCarBool" class="bottom-button" (tap)="addCarPrompt()">
+                <div>Add a car</div>
+                <button ion-button round outline large icon-only class="add-car">
+                    <ion-icon name="add"></ion-icon>
+                </button>
             </div>
-            
         </ion-slide>
+
         <ion-slide style="display:block;">
             
             <ul class="list">
@@ -63,14 +58,14 @@
                     <div class="taker">{{e.firstname}}</div>
                 </li>
             </ul>
-            <div class="list-input">
-                <input type="text" [(ngModel)]="element" class="element-utils" placeholder="element">
-                <div class="add-elem" (tap)="addElement()">
-                    Add
-                </div>
+            <div class="bottom-button" (tap)="addElementPrompt()">
+                <div>Add an element</div>
+                <button ion-button round outline large icon-only class="add-car" >
+                    <ion-icon name="add"></ion-icon>
+                </button>
             </div>
-            
         </ion-slide>
+
         <ion-slide style="display:block;">
             
             <div *ngFor="let e of exps;let ind=index" class="expense" (tap)="toggleExpsDetails(ind)">
@@ -88,8 +83,14 @@
                     
                 </div>
             </div>
-           <div class="add-exp" (tap)="showAddExp()">
-               Add an expense
+            <div class="resolve-div" *ngIf="expensesPage && exps && exps.length > 0" (click)="resolve()">
+                    <ion-icon name="calculator"></ion-icon>
+            </div>
+           <div class="bottom-button" (tap)="addExpensePrompt()">
+               <div>Add an expense</div>
+               <button ion-button round outline large icon-only class="add-car">
+                    <ion-icon name="add"></ion-icon>
+                </button>
            </div>
            
         </ion-slide>

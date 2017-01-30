@@ -53,10 +53,10 @@ export class ToNow {
     
     
     
-    let backVal = "j-"+soon.toString();
+    let backVal = "J-"+soon.toString();
    
     if(isNaN(soon)){
-      backVal = "j-0";
+      backVal = "J-0";
     }
     
     if(soon == 0){

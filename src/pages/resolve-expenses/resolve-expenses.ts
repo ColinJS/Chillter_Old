@@ -18,6 +18,7 @@ export class ResolveExpenses {
     
     let baseExps = this.navParams.get("expenses")
     
+    console.log("baseExps")
     console.log(baseExps)
     
     let tmpList: any[] = [];
@@ -34,15 +35,15 @@ export class ResolveExpenses {
       }
       
       if(neo){
-        
         let tmpExp={
           "chiller":e.payer,
           "credit":parseFloat(e.price)
         }
-        
         tmpList.push(tmpExp);
       }
       
+      console.log(tmpList);
+
       let count = e.inheriters.length
       
       for(let i of e.inheriters){

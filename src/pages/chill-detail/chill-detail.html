@@ -6,6 +6,10 @@
 -->
 
 <ion-content class="chill-detail" scroll="false">
+    <div class="floating-close-button" (tap)="close(2)"><img src="images/close-outline.svg"/></div>
+    <div #leftPan class="overlay leftpanaccept" [style.opacity]="sendOpa" [style.transform]="sendPos"></div>
+    <div #rightPan class="overlay rightpanrefuse" [style.opacity]="backOpa" [style.transform]="backPos"></div>
+
     <div class="chills-header">
             
         <div class="ch-background">
@@ -16,23 +20,23 @@
         </div>
         
     </div>
-    <div class="invite" padding (swipe)="swipeEvent($event)">
-        
-        <div #leftPan class="overlay leftpan" [style.opacity]="sendOpa" [style.transform]="sendPos"></div>
 
+    <div class="invite" padding (swipe)="swipeEvent($event)" (pan)="panEvent($event)">
+        
+        
         <div class="invite-header">
-            <h1 class="upper">{{name}}</h1>
-            <h2>You're invited by <i class="creator">{{firstName}} {{lastName}}</i></h2>
+            <h1 class="upper title">{{name}}</h1>
+            <h2>You're invited by <i class="creator" [style.color]="'#'+color">{{firstName}} {{lastName}}</i></h2>
         </div>
         
-        <div class="invite-geo">
+        <div class="invite-geo" [style.color]="'#'+color">
             <h1>{{geo}}</h1>
             <h2>{{geoSpec}}</h2>
         </div>
         
-        <div class="invite-time">
-            <div class="invite-time-left"><i class="invite-day">{{day}}</i> à <i class="invite-hours">{{hours}}</i><i class="exp">h</i><i class="invite-minutes">{{min}}</i></div>
-            <div class="invite-time-right">{{soonDate | toNow}}</div>
+        <div class="invite-time" [style.color]="'#'+color">
+            <div class="invite-time-left"><i class="invite-day">{{stringDay}}</i> <i class="invite-day-number">{{numberDay}}</i> à <i class="invite-hours">{{hours}}</i><i class="exp">h</i><i class="invite-minutes">{{min}}</i></div>
+            <div class="invite-time-right" *ngIf="soonDateDisplay">{{soonDate | toNow}}</div>
         </div>
         
         <div class="invite-com" text-justify>
@@ -45,6 +49,7 @@
             <img src="images/tool-list-outline.svg" (tap)="showUtils(1)"/>
             <img src="images/tool-pig-outline.svg" (tap)="showUtils(2)"/>
         </div>
+        <div class="friends-number">{{friends.length}} invités</div>
         <div class="invite-friends">
            <img src="http://www.chillter.com/api/images/chill-plus.svg" *ngIf="mine" (tap)="showFriends()"/>
            <div class="ion-scroll-friends">

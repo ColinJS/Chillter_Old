@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { Platform } from 'ionic-angular';
+import { Platform, Events } from 'ionic-angular';
 import { StatusBar, Splashscreen, ScreenOrientation } from 'ionic-native';
 import { TabsPage } from '../pages/tabs/tabs';
 import { LogIn } from '../pages/login/login';
 import { Keyboard } from 'ionic-native';
-
+import { Push, PushToken } from '@ionic/cloud-angular';
 
 @Component({
   templateUrl: 'app.html',
@@ -13,7 +13,7 @@ import { Keyboard } from 'ionic-native';
 export class ChillterApp {
   rootPage: any = LogIn;
 
-  constructor( platform: Platform) {
+  constructor(public push: Push, public notif: Events, platform: Platform) {
     
     let token = localStorage.getItem("_token");
     let id = localStorage.getItem("_id");
@@ -36,6 +36,12 @@ export class ChillterApp {
       Keyboard.hideKeyboardAccessoryBar(false);
       Keyboard.disableScroll(true)
       
+      this.push.rx.notification()
+      .subscribe((msg) => {
+          console.log("Notification: "+msg);
+          this.notif.publish("notif:update");
+      });
+
     });
   }
 }

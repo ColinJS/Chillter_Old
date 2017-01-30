@@ -2,6 +2,7 @@ import { Component,ViewChild } from '@angular/core';
 import { NavController,App,Events, AlertController, ToastController } from 'ionic-angular';
 import { HttpProvider } from '../../providers/http-provider/http-provider';
 import { ImgLoader } from '../../components/img-loader/img-loader';
+import { Push, PushToken } from '@ionic/cloud-angular';
 
 /*
   Generated class for the ChillSetPage page.
@@ -30,7 +31,7 @@ export class ChillSet {
   
   haveChange: boolean = false;
   
-  constructor(public toastCtrl: ToastController,public alertCtrl: AlertController,public notif:Events, public http: HttpProvider,public nav: NavController,public app: App) {
+  constructor(public push: Push, public toastCtrl: ToastController,public alertCtrl: AlertController,public notif:Events, public http: HttpProvider,public nav: NavController,public app: App) {
       
       this.getChillerInfo();
       
@@ -244,6 +245,10 @@ export class ChillSet {
       
       localStorage.removeItem("_token")
       localStorage.removeItem("_id")
+
+      this.push.unregister().then(()=>{
+          console.log("unregister notifications.")
+      });
       this.notif.publish("nav:login");
   }
 }

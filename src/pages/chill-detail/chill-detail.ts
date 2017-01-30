@@ -34,7 +34,7 @@ export class ChillDetail{
     
     eventDate: Date;
     soonDate: Date;
-    
+    soonDateDisplay: boolean =false;
     day: string;
     hours: string;
     min: string;
@@ -46,6 +46,11 @@ export class ChillDetail{
     lastName: string;
     friends: any[] = [];
     allFriends: any[] = [];
+
+    stringDay: string = "";
+    numberDay: string = "";
+
+    color: string="ff862a";
   
   constructor(public mod:ModalController, public nav: NavController,public viewCtrl: ViewController, public http: HttpProvider, public navParams: NavParams) {
     
@@ -55,12 +60,18 @@ export class ChillDetail{
   
   formatDate(){
       
-    let dayName = ["Sunday","Monday","Thuesday","Wednesday","Thursday","Friday","Saturday"];
+    let dayName = ["Sun.","Mon.","Tues.","Wed.","Thurs.","Fri.","Sat."];
       
     this.soonDate = new Date(this.eventDate.getTime())
-    
-      
-    this.day = dayName[this.eventDate.getDay()]+" "+(this.eventDate.getDate()).toString();
+    let now = new Date()
+    now = new Date(now.getFullYear(),now.getMonth(),now.getDate(),24)
+
+    if(!(this.soonDate<now)){ 
+        this.soonDateDisplay = true;
+    }
+
+    this.stringDay = dayName[this.eventDate.getDay()];
+    this.numberDay = (this.eventDate.getDate()).toString();
     this.hours=(this.eventDate.getHours()).toString();
     if(this.hours.length == 1){
         this.hours = "0"+this.hours
@@ -98,6 +109,7 @@ export class ChillDetail{
                   this.eventDate = new Date(data.date)
                   this.formatDate();
                   this.getNames();
+                  this.color = data.color;
                   if(data.chillerid == id){
                       this.mine = true
                   }else{
@@ -132,13 +144,7 @@ export class ChillDetail{
       }
   }
   
-  swipeEvent(evt){
-      console.log(evt)
-      if(evt.deltaX < -25){
-          this.close()
-      }
-  }
-  
+ 
   addFriends(friendId: string){
       //re-store the local token
       let token = localStorage.getItem("_token");
@@ -269,6 +275,17 @@ export class ChillDetail{
       
       console.log("end");
   }
+  
+  swipeEvent(evt: any): void{
+      
+      this.swiping = true;
+      console.log(evt);
+      if(evt.deltaX > 25){
+          this.close(1,"accept");
+      }else if(evt.deltaX < -25){
+          this.close(0,"refuse");
+      }
+  }
 
   panEvent(evt: any){
       
@@ -291,13 +308,13 @@ export class ChillDetail{
       if(evt.isFinal && this.sendVal < -30 && this.sendVal != -100){
           if(!this.swiping){this.animateTo("send",-100)}
       }else if(evt.isFinal && this.sendVal >= -30 && this.sendVal != -100){
-          this.close()
+          this.close(0,"refuse");
       }
       
       if(evt.isFinal && this.backVal > 30 && this.backVal != 100){
           if(!this.swiping){this.animateTo("back",100)}
       }else if(evt.isFinal && this.backVal <= 30 && this.backVal != 100){
-          this.close()
+          this.close(1,"accept");
       }
       
       
@@ -308,8 +325,15 @@ export class ChillDetail{
 
   }
 
-  close(){
-      this.viewCtrl.dismiss();
+  close(anim: number=0,accept: string=""){
+      if(anim == 0){
+            this.animateTo("back",0);
+        }else if(anim == 1){
+            this.animateTo("send",0);
+        }
+        setTimeout(()=>{
+            this.viewCtrl.dismiss({"accept":accept});
+        }, 400);
   }
   
 }
