@@ -214,7 +214,7 @@ export class ChillBox {
 
                   console.log("event list: ")
                   console.log(this.events)
-                  
+
                   this.filterEvents();
                   
               }else{

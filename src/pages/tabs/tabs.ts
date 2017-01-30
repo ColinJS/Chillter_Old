@@ -6,7 +6,7 @@ import {LogIn} from '../login/login';
 import {FriendList} from '../friend-list/friend-list';
 import {ChillBox} from '../chill-box/chill-box';
 import {ChillSet} from '../chill-set/chill-set';
-
+import { Push, PushToken } from '@ionic/cloud-angular';
 
 /*
   Generated class for the TabsPage page.
@@ -28,15 +28,21 @@ export class TabsPage {
   friendBadge: number = null;
   timer: any;
   
-  constructor(public navCtrl: NavController,public http: HttpProvider,public notif: Events) {
-    
+  constructor(public push: Push, public navCtrl: NavController,public http: HttpProvider,public notif: Events) {
+    this.getNotification();
     this.notif.subscribe("notif:update",()=>{
       this.getNotification();
     });
     this.notif.subscribe("nav:login",()=>{
       this.backToLogin();
     });
-    
+
+    this.push.rx.notification()
+        .subscribe((msg) => {
+            console.log("Notification: "+msg);
+            this.getNotification;
+        });
+
   }
 
   getNotification(){

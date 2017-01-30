@@ -25,7 +25,7 @@ export class Home {
   deleteMode: boolean = false; 
   
   constructor( public push: Push,public notif: Events,public http: HttpProvider,public nav: NavController,public modal: ModalController) {
-    
+      this.notif.publish("notif:update");
       //test this information and pop the log if doesn't exist
       if(this.token==null){
           this.notif.publish("nav:login");
@@ -51,13 +51,13 @@ export class Home {
         }).then((t: PushToken) => {
             console.log('Token saved:', t.token);
         });
-
+        /*
         this.push.rx.notification()
         .subscribe((msg) => {
             console.log("Notification: "+msg);
             this.notif.publish("notif:update");
         });
-        
+        */
   }
   //take the home chills (logo of event) from the dataBase
   getHome(){
@@ -89,7 +89,10 @@ export class Home {
                     this.logout();
                 }
             },
-            () => this.http.logError("nothing")
+            () => {
+                this.registerPush()
+                this.notif.publish("notif:update");    
+            }
         )
       
   }
